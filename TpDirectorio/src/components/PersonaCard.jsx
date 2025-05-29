@@ -7,7 +7,6 @@ import personas from "../assets/people.json";
 function PersonaCard() {
   const { id } = useParams();
   const persona = personas.find(p => p.id === parseInt(id));
-
   if (!persona) return <p>Persona no encontrada</p>;
   else
   {
