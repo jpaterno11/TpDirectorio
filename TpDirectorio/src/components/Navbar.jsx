@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function NavbarGeneral() {
   return (
-    <Navbar fixed="bottom" expand="lg" className="bg-body-tertiary">
+    <Navbar fixed="bottom" expand="lg" bg="dark" variant="dark">
       <Container className="justify-content-center">
         <Nav>
           <Nav.Link

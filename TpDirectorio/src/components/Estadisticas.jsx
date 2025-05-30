@@ -1,5 +1,5 @@
-import Card from 'react-bootstrap/Card';
 import personas from "../assets/people.json";
+import { Container, Card, ListGroup } from "react-bootstrap";
 
 const CantPersonas = personas.length;
 let cantMas35 = 0;
@@ -25,9 +25,23 @@ let promedioEdades = acumEdades / CantPersonas;
 
 function Estadisticas() {
   return (
-    <h1>{CantPersonas} {cantMas35} {cantMenos35} {cantMayorEdad} {cantMenorEdad} {promedioEdades}</h1> 
+    <Container className="my-4 d-flex justify-content-center">
+      <Card style={{ width: '22rem' }}>
+        <Card.Header as="h4" className="text-center">
+          Estadísticas del grupo
+        </Card.Header>
+        <ListGroup variant="flush">
+          <ListGroup.Item><strong>Total de personas:</strong> {CantPersonas}</ListGroup.Item>
+          <ListGroup.Item><strong>Personas mayores de 35 años:</strong> {cantMas35}</ListGroup.Item>
+          <ListGroup.Item><strong>Personas de 35 años o menos:</strong> {cantMenos35}</ListGroup.Item>
+          <ListGroup.Item><strong>Personas mayores de edad:</strong> {cantMayorEdad}</ListGroup.Item>
+          <ListGroup.Item><strong>Personas menores de edad:</strong> {cantMenorEdad}</ListGroup.Item>
+          <ListGroup.Item><strong>Edad promedio:</strong> {promedioEdades} años</ListGroup.Item>
+        </ListGroup>
+      </Card>
+    </Container>
   );
-  }
+}
   
   export default Estadisticas;
   
