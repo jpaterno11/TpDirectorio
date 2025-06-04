@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import "./form.css"
+import "./form.css";
 import { useNavigate } from "react-router-dom";
 
 function FormularioContacto() {
@@ -9,6 +9,7 @@ function FormularioContacto() {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [email, setEmail] = useState("");
+  const [edad, setEdad] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [confirmarContraseña, setConfirmarContraseña] = useState("");
 
@@ -16,6 +17,7 @@ function FormularioContacto() {
     nombre: "",
     apellido: "",
     email: "",
+    edad: "",
     contraseñaA: "",
     contraseñaB: "",
     contraseñaC: "",
@@ -26,6 +28,7 @@ function FormularioContacto() {
     nombre: false,
     apellido: false,
     email: false,
+    edad: false,
     contraseñaA: false,
     contraseñaB: false,
     contraseñaC: false,
@@ -54,17 +57,30 @@ function FormularioContacto() {
     return esValido;
   };
 
+  const validarEdad = (valor) => {
+    const num = parseInt(valor);
+    const esValido = !isNaN(num) && num > 0 && num < 120;
+    setMensajes((m) => ({ ...m, edad: esValido ? "Edad válida" : "La edad debe estar entre 1 y 119" }));
+    setValidaciones((v) => ({ ...v, edad: esValido }));
+    return esValido;
+  };
+
   const validarContraseña = (valor) => {
     const mayuscula = /[A-Z]/.test(valor);
     const numero = /[0-9]/.test(valor);
     const largo = valor.length >= 8;
-    setMensajes((m) => ({ ...m, contraseñaA: largo ? "Al menos 8 caracteres" : "Faltan caracteres", contraseñaB: mayuscula ? "Contiene mayúscula" : "Falta una mayúscula", contraseñaC: numero ? "Contiene número" : "Falta un número" }));
+    setMensajes((m) => ({
+      ...m,
+      contraseñaA: largo ? "Al menos 8 caracteres" : "Faltan caracteres",
+      contraseñaB: mayuscula ? "Contiene mayúscula" : "Falta una mayúscula",
+      contraseñaC: numero ? "Contiene número" : "Falta un número"
+    }));
     setValidaciones((v) => ({ ...v, contraseñaA: largo, contraseñaB: mayuscula, contraseñaC: numero }));
     return largo && mayuscula && numero;
   };
 
   const validarConfirmacion = (valor) => {
-    const esValido = (valor === contraseña);
+    const esValido = valor === contraseña;
     setMensajes((m) => ({ ...m, confirmacion: esValido ? "Las contraseñas coinciden" : "Las contraseñas no coinciden" }));
     setValidaciones((v) => ({ ...v, confirmacion: esValido }));
     return esValido;
@@ -75,11 +91,18 @@ function FormularioContacto() {
     const nombreValido = validarNombre(nombre);
     const apellidoValido = validarApellido(apellido);
     const emailValido = validarEmail(email);
+    const edadValida = validarEdad(edad);
     const contraseñaValida = validarContraseña(contraseña);
     const confirmacionValida = validarConfirmacion(confirmarContraseña);
-    if (nombreValido && apellidoValido && emailValido && contraseñaValida && confirmacionValida) {
+
+    if (nombreValido && apellidoValido && emailValido && edadValida && contraseñaValida && confirmacionValida) {
       alert("Te registraste correctamente. ¡Bienvenido a bordo!");
-      navigate("/"); // Navigate to home
+      fetch("http://localhost:3001/api/people", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, apellido, edad, email }),
+      });
+      navigate("/");
     } else {
       alert("Verificá los datos. Algo está mal.");
     }
@@ -106,6 +129,11 @@ function FormularioContacto() {
           <Form.Control type="email" placeholder="Email" value={email} onChange={(e) => { setEmail(e.target.value); validarEmail(e.target.value); }} isValid={validaciones.email} isInvalid={email !== "" && !validaciones.email} />
           <div style={{ color: validaciones.email ? "green" : "red" }}>{mensajes.email}</div>
         </Form.Group>
+        <Form.Group as={Col} controlId="edad">
+          <Form.Label>Ingrese su edad:</Form.Label>
+          <Form.Control type="number" placeholder="Edad" value={edad} onChange={(e) => { setEdad(e.target.value); validarEdad(e.target.value); }} isValid={validaciones.edad} isInvalid={edad !== "" && !validaciones.edad} />
+          <div style={{ color: validaciones.edad ? "green" : "red" }}>{mensajes.edad}</div>
+        </Form.Group>
       </Row>
 
       <Row className="mb-3">
@@ -122,6 +150,7 @@ function FormularioContacto() {
           <div style={{ color: validaciones.confirmacion ? "green" : "red" }}>{mensajes.confirmacion}</div>
         </Form.Group>
       </Row>
+
       <Button type="submit" variant="primary">Enviar</Button>
     </Form>
   );

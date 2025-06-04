@@ -13,9 +13,7 @@ function Home() {
             <Card.Body>
               <Card.Title>{persona.nombre} {persona.apellido}</Card.Title>
               <Card.Text>{persona.edad} años</Card.Text>
-              <Button variant="primary" as={NavLink} to={`/persona/${persona.id}`}>
-                Ver más
-              </Button>
+              <Button variant="primary" as={NavLink} to={`/persona/${persona.id}`}>Ver más</Button>
             </Card.Body>
           </Card>
         </li>

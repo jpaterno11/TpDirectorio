@@ -1,2 +1,3 @@
 # TpDirectorio
 Bibliografia: https://react-bootstrap.netlify.app/ (bootstrap), https://www.altcademy.com/blog/how-to-use-foreach-in-reactjs/ (uso del "foreach"), https://cssgridgenerator.io/ (generador del grid de la home).
+Con el fin de guardar los nuevos usuarios, tuvimos que levantar el servidor en Node (server.cjs) para reescribir el people.json. Luego, podemos iniciar el proyecto react-vite y tendremos todo el codigo funcionando. En caso de no correr el servidor Node, ¡el formulario no respondera!
