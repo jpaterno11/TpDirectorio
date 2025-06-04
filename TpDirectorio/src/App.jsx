@@ -15,7 +15,7 @@ function App() {
       <Route path="persona/:id" element={<PersonaCard />} />
       <Route path="estadisticas" element={<Estadisticas />} />
       <Route path="contacto" element={<FormularioContacto />} />
-      <Route path="*" element={<h1>404</h1>} />
+      <Route path="*" element={<h1 style={{ color: "white" }}>No encontramos lo que buscás 😕 <br></br> (404)</h1>} />
     </Route>
   </Routes>
 </BrowserRouter>

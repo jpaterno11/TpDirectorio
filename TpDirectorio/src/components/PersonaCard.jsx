@@ -22,9 +22,9 @@ function PersonaCard() {
           <Card.Title>{persona.nombre}</Card.Title>
           <Card.Text>
             <ul>
-            <li>Nombre Completo: {persona.nombre} {persona.apellido}</li>
-            <li>Email: {persona.email}</li>
-            <li>Edad: {persona.edad} años ({condicionEdad})</li>
+            <li>Nombre Completo: <p className='p'>{persona.nombre} {persona.apellido}</p></li>
+            <li>Email: <p className='p'>{persona.email}</p></li>
+            <li>Edad: <p className='p'>{persona.edad} años ({condicionEdad})</p></li>
             
             </ul>
           </Card.Text>

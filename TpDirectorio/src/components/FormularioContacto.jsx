@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import "./form.css"
+import { useNavigate } from "react-router-dom";
 
 function FormularioContacto() {
+  const navigate = useNavigate();
+
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [email, setEmail] = useState("");
@@ -61,7 +64,7 @@ function FormularioContacto() {
   };
 
   const validarConfirmacion = (valor) => {
-    const esValido = valor === contraseña;
+    const esValido = (valor === contraseña);
     setMensajes((m) => ({ ...m, confirmacion: esValido ? "Las contraseñas coinciden" : "Las contraseñas no coinciden" }));
     setValidaciones((v) => ({ ...v, confirmacion: esValido }));
     return esValido;
@@ -76,6 +79,7 @@ function FormularioContacto() {
     const confirmacionValida = validarConfirmacion(confirmarContraseña);
     if (nombreValido && apellidoValido && emailValido && contraseñaValida && confirmacionValida) {
       alert("Te registraste correctamente. ¡Bienvenido a bordo!");
+      navigate("/"); // Navigate to home
     } else {
       alert("Verificá los datos. Algo está mal.");
     }

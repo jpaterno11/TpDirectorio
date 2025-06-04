@@ -1,2 +1,2 @@
 # TpDirectorio
-Bibliografia: https://react-bootstrap.netlify.app/ (bootstrap), https://www.altcademy.com/blog/how-to-use-foreach-in-reactjs/ (uso del "foreach"), https://cssgridgenerator.io/ (generador del grid de la home)
+Bibliografia: https://react-bootstrap.netlify.app/ (bootstrap), https://www.altcademy.com/blog/how-to-use-foreach-in-reactjs/ (uso del "foreach"), https://cssgridgenerator.io/ (generador del grid de la home).
